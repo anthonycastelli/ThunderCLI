@@ -162,18 +162,12 @@ class InitCommand: ThunderCommand {
     private func flockfileDefault() -> String {
       return [
             "import Thunder",
-            "import SwiftenvFlock",
             "",
-            "Flock.use(Thunder.Tools)",
-            "Flock.use(Thunder.Deploy)",
-            "Flock.use(Thunder.Swiftenv)",
-            "Flock.use(Thunder.Server)",
+            "Thunder.configure(.always, with: Always()) // Located at \(Path.deployDirectory)/Always.swift",
+            "Thunder.configure(.env(\"production\"), with: Production()) // Located at \(Path.deployDirectory)/Production.swift",
+            "Thunder.configure(.env(\"staging\"), with: Staging()) // Located at \(Path.deployDirectory)/Staging.swift",
             "",
-            "Flock.configure(.always, with: Always()) // Located at \(Path.deployDirectory)/Always.swift",
-            "Flock.configure(.env(\"production\"), with: Production()) // Located at \(Path.deployDirectory)/Production.swift",
-            "Flock.configure(.env(\"staging\"), with: Staging()) // Located at \(Path.deployDirectory)/Staging.swift",
-            "",
-            "Flock.run()",
+            "Thunder.run()",
             ""
         ].joined(separator: "\n")
     }
@@ -184,8 +178,8 @@ class InitCommand: ThunderCommand {
             "   \"dependencies\" : [",
             "       {",
             "           \"url\" : \"https://github.com/anthonycastelli/Thunder\",",
-            "           \"major\": 0",
-            "       },",
+            "           \"major\": 1",
+            "       }",
             "   ]",
             "}",
             ""
